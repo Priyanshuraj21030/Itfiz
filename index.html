@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pha5e Clone</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .hero {
+        position: relative;
+      }
+
+      .hero-title {
+        transition: all 0.4s ease-in-out;
+      }
+
+      .image-container {
+        transition: all 0.4s ease-in-out, transform 0.2s ease-out;
+      }
+
+      .image-container img {
+        transition: all 0.4s ease-in-out;
+        filter: grayscale(0%);
+      }
+
+      .image-container:not(:hover) img {
+        filter: grayscale(100%) contrast(200%) brightness(120%);
+        opacity: 0.6;
+        mix-blend-mode: luminosity;
+      }
+
+      .image-container:hover ~ .hero-content .hero-title {
+        color: transparent;
+        -webkit-text-stroke: 2px var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="#" class="logo-text">PHA5E</a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Our vision</a>
+        <a href="#">Our team</a>
+        <a href="#">Our projects</a>
+        <a href="#">Contact us</a>
+        <div class="language-switch">
+          <a href="#">FR</a>
+          <span>/</span>
+          <a href="#" class="active">EN</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-images">
+        <div class="image-container" data-text="BIGGER SCIENCE">
+          <img
+            src="assets/path-to-image1.jpg"
+            alt="Digital Experience"
+            class="floating-image"
+          />
+        </div>
+        <div class="image-container" data-text="IMMERSIVE EXPERIENCE">
+          <img
+            src="assets/path-to-image2.jpg"
+            alt="Creative Design"
+            class="floating-image"
+          />
+        </div>
+        <div class="image-container" data-text="WEBGL GAMING">
+          <img
+            src="assets/path-to-image3.jpg"
+            alt="Innovative Solutions"
+            class="floating-image"
+          />
+        </div>
+        <div class="image-container" data-text="3D DESIGN">
+          <img
+            src="assets/path-to-image4.jpg"
+            alt="Digital Solutions"
+            class="floating-image"
+          />
+        </div>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span>IMAGINING</span>
+          <span>UNIQUE</span>
+          <span>CONCEPTS</span>
+          <span>AND DIGITAL</span>
+          <span>EXPERIENCES</span>
+        </h1>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const images = document.querySelectorAll(".image-container img");
+
+        images.forEach((img) => {
+          img.addEventListener("mousemove", (e) => {
+            const { left, top, width, height } = img.getBoundingClientRect();
+            const x = ((e.clientX - left) / width - 0.5) * 20;
+            const y = ((e.clientY - top) / height - 0.5) * 20;
+            img.style.transform = `translate(${x}px, ${y}px)`;
+          });
+
+          img.addEventListener("mouseleave", () => {
+            img.style.transform = "translate(0, 0)";
+          });
+        });
+      });
+    </script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  </body>
+</html>
