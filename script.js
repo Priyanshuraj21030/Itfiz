@@ -1,5 +1,6 @@
 document.querySelectorAll(".image-container").forEach((container) => {
   // Function to toggle text effect
+  //test
   function toggleTextEffect(isHovered) {
     const heroTitle = document.querySelector(".hero-title");
     const titleSpans = heroTitle.querySelectorAll("span");
