@@ -1,3 +1,53 @@
+// Enhanced Preloader Logic
+window.addEventListener("load", () => {
+  const preloader = document.querySelector(".preloader");
+  const progress = document.querySelector(".preloader-progress");
+  const percentage = document.querySelector(".preloader-percentage");
+  const preloaderText = document.querySelector(".preloader-text");
+  let width = 0;
+  const totalDuration = 3500; // 3.5 seconds total
+  const steps = 100;
+  const stepDuration = totalDuration / steps;
+
+  // Smooth progress animation
+  const updateProgress = () => {
+    if (width >= 100) {
+      // Add glitch effect near completion
+      preloaderText.classList.add("glitch");
+
+      // Fade out preloader
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+        setTimeout(() => {
+          preloader.style.display = "none";
+          document.body.classList.add("loaded");
+        }, 300);
+      }, 200);
+
+      return;
+    }
+
+    // Increment progress
+    width++;
+
+    // Update UI with easing
+    const easedProgress = easeInOutQuad(width / 100) * 100;
+    progress.style.width = `${easedProgress}%`;
+    percentage.textContent = `LOADING ${Math.round(easedProgress)}%`;
+
+    // Schedule next update
+    setTimeout(updateProgress, stepDuration);
+  };
+
+  // Easing function for smoother progress
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  // Start progress after a short delay
+  setTimeout(updateProgress, 200);
+});
+
 document.querySelectorAll(".image-container").forEach((container) => {
   // Function to toggle text effect
   //test

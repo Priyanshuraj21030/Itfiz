@@ -33,9 +33,196 @@
         color: transparent;
         -webkit-text-stroke: 2px var(--primary-color);
       }
+
+      /* Simple Preloader Styles */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.3s ease-out;
+      }
+
+      .preloader-content {
+        text-align: center;
+        position: relative;
+      }
+
+      .preloader-text {
+        font-size: 5rem;
+        font-weight: 700;
+        letter-spacing: 12px;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--primary-color);
+        margin-bottom: 30px;
+        position: relative;
+        text-transform: uppercase;
+        animation: glowText 2s ease-in-out infinite alternate;
+      }
+
+      .preloader-text::after {
+        content: "PHA5E";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 100%;
+        color: var(--primary-color);
+        overflow: hidden;
+        animation: fillText 2s ease-in-out infinite;
+      }
+
+      @keyframes fillText {
+        0%,
+        10% {
+          width: 0;
+        }
+        45%,
+        55% {
+          width: 100%;
+        }
+        90%,
+        100% {
+          width: 0;
+        }
+      }
+
+      @keyframes glowText {
+        0% {
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+          letter-spacing: 12px;
+        }
+        100% {
+          text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+          letter-spacing: 15px;
+        }
+      }
+
+      .preloader-bar {
+        width: 300px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 0 auto;
+        position: relative;
+        overflow: visible;
+        border-radius: 1px;
+      }
+
+      .preloader-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0%;
+        background: var(--primary-color);
+        box-shadow: 0 0 10px var(--primary-color);
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .preloader-progress::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(50%, -50%);
+        width: 6px;
+        height: 6px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--primary-color);
+      }
+
+      .preloader-percentage {
+        margin-top: 20px;
+        font-size: 1rem;
+        color: var(--primary-color);
+        opacity: 0.7;
+        letter-spacing: 3px;
+        font-weight: 300;
+        position: relative;
+      }
+
+      .preloader-percentage::after {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 1px;
+        background: var(--primary-color);
+        margin: 10px auto 0;
+        transform-origin: center;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scaleX(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scaleX(1.5);
+          opacity: 1;
+        }
+      }
+
+      .preloader.fade-out {
+        opacity: 0;
+      }
+
+      .preloader-text.glitch {
+        animation: glitch 0.4s ease-in-out infinite alternate;
+      }
+
+      @keyframes glitch {
+        0% {
+          transform: skew(0deg);
+          text-shadow: none;
+        }
+        25% {
+          transform: skew(10deg);
+          text-shadow: 3px 3px var(--primary-color);
+        }
+        50% {
+          transform: skew(-10deg);
+          text-shadow: -3px -3px var(--primary-color);
+        }
+        75% {
+          transform: skew(5deg);
+          text-shadow: 3px 3px var(--primary-color);
+        }
+        100% {
+          transform: skew(-5deg);
+          text-shadow: -3px -3px var(--primary-color);
+        }
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      body.loaded {
+        overflow: auto;
+      }
     </style>
   </head>
   <body>
+    <!-- Simple Preloader -->
+    <div class="preloader">
+      <div class="preloader-content">
+        <div class="preloader-text">PHA5E</div>
+        <div class="preloader-bar">
+          <div class="preloader-progress"></div>
+        </div>
+        <div class="preloader-percentage">LOADING</div>
+      </div>
+    </div>
+
     <nav class="navbar">
       <div class="logo">
         <a href="#" class="logo-text">PHA5E</a>
@@ -60,31 +247,31 @@
 
     <section class="hero">
       <div class="hero-images">
-        <div class="image-container" data-text="BIGGER SCIENCE">
+        <div class="image-container" data-text="Bigger Science">
           <img
-            src="assets/path-to-image1.jpg"
-            alt="Digital Experience"
+            src="assets/IMG1.jpg"
+            alt="Bigger Science"
             class="floating-image"
           />
         </div>
-        <div class="image-container" data-text="IMMERSIVE EXPERIENCE">
+        <div class="image-container" data-text="Muchembe">
           <img
-            src="assets/path-to-image2.jpg"
-            alt="Creative Design"
+            src="assets/IMG2.jpg"
+            alt="Muchembe"
             class="floating-image"
           />
         </div>
-        <div class="image-container" data-text="WEBGL GAMING">
+        <div class="image-container" data-text="Unganisha">
           <img
-            src="assets/path-to-image3.jpg"
-            alt="Innovative Solutions"
+            src="assets/IMG3.jpg"
+            alt="Unganisha"
             class="floating-image"
           />
         </div>
-        <div class="image-container" data-text="3D DESIGN">
+        <div class="image-container" data-text="Olive Tree">
           <img
-            src="assets/path-to-image4.jpg"
-            alt="Digital Solutions"
+            src="assets/IMG4.jpg"
+            alt="Olive Tree"
             class="floating-image"
           />
         </div>
